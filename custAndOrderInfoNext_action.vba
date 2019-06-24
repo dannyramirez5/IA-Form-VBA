@@ -7,6 +7,7 @@ Dim entered As String
 Dim requestor As String
 Dim fse As String
 
+'Makes the help section appear
 Private Sub adjustmentPreparedByLbl_Click()
    helpAdjustmentPreparedBy.Show
 End Sub
@@ -16,9 +17,11 @@ Private Sub customerAndOrderInformationBackCmndBx_Click()
    adjustmentTypeForm.Show
 End Sub
 
+'unprotects the sheet with the password
 Private Sub customerAndOrderInformationNextCmndBx_Click()
    Sheets("Completed Form").unprotect "dantheman5"
    
+   'making all the needed assignments for the variables
    customerID = customerAndOrderInformationForm.customerIDTxtBx
    customerName = customerAndOrderInformationForm.customerNameTxtBx
    orderNumber = customerAndOrderInformationForm.orderNumberTxtBx
@@ -27,6 +30,7 @@ Private Sub customerAndOrderInformationNextCmndBx_Click()
    requestor = customerAndOrderInformationForm.adjustmentPreparedByTxtBx
    fse = customerAndOrderInformationForm.fsetxtbx
    
+   'this is just to make sure all the required fields have been filled out
    If customerID = "" Then
    MsgBox "Please enter the Customer's ID.", vbCritical, "Missing Information"
    Exit Sub
@@ -44,6 +48,7 @@ Private Sub customerAndOrderInformationNextCmndBx_Click()
    Exit Sub
    End If
 
+   'giving the cells the values of the variables after they've been assigned
    Cells(8, 1) = customerID
    Cells(9, 1) = customerName
    Cells(8, 5) = orderNumber
@@ -52,12 +57,13 @@ Private Sub customerAndOrderInformationNextCmndBx_Click()
    Cells(9, 9) = requestor
    Cells(10, 9) = fse
   
+   'allows the Edit button to now be visible for the respective section               
    compForm.customerInformationEditBtn.Visible = True
   
    customerAndOrderInformationForm.Hide
    formPreTaxAmount.Show
    
-   
+   'reprotecting the sheet now that the action is done
    Sheets("Completed Form").Protect "dantheman5"
 End Sub
 
